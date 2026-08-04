@@ -11,7 +11,7 @@ public:
            if(nums[j]==0){
             cnt++;
            }
-           while(cnt>k){
+           if(cnt>k){
             if(nums[i]==0){
                 cnt--;
             }
