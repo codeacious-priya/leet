@@ -10,7 +10,7 @@ public:
         for(int j=0;j<n;j++){
             mp[s[j]]++;
              maxi=max(maxi,mp[s[j]]);
-            while(j-i+1 - maxi>k){
+            if(j-i+1 - maxi>k){
                 mp[s[i]]--;
                 i++;
             }
