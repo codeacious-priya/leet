@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void solve(vector<int>&arr,int sum,int i,int target,vector<vector<int>>&ans,vector<int>res){
+    void solve(vector<int>&arr,int sum,int i,int target,vector<vector<int>>&ans,vector<int>&res){
     
         int n=arr.size();
         // base case
