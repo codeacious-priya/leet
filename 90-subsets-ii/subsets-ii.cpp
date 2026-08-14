@@ -9,10 +9,6 @@ public:
         }
 
         //take 
-       
-        
-        
-     
         res.push_back(nums[i]);
         solve(nums,i+1,res,ans);
         res.pop_back();
