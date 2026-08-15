@@ -1,20 +1,20 @@
 class Solution {
 public:
-    bool isequal(string s1,string s2){
-        int n=s2.size();
+    bool isequal(string s,string t){
+        int n=t.size();
         for(int i=0;i<n;i++){
-            if(s1[i]!=s2[i]) return false;
+            if(s[i]!=t[i]){
+                return false;
+            }
         }
         return true;
     }
-    int strStr(string haystack, string needle) {
-        int m=haystack.size();
-        int n=needle.size();
-
+    int strStr(string s, string t) {
+        int n=s.size();
         int j=0;
-        for(int i=0;i<m;i++){
-            if(haystack[i]==needle[j]){
-                if(isequal(haystack.substr(i,n),needle)){
+        for(int i=0;i<n;i++){
+            if(s[i]==t[j]){
+                if(isequal(s.substr(i,n),t)){
                     return i;
                 }
             }
