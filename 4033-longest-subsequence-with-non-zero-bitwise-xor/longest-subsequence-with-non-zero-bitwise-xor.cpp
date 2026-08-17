@@ -2,20 +2,21 @@ class Solution {
 public:
     int longestSubsequence(vector<int>& nums) {
         int n=nums.size();
-        int maxi=0;
-        int ans=0;
-        for(int i=0;i<n;i++){
-           ans^=nums[i];
-            maxi=max(maxi,ans);
-        }
-        
-        if(ans!=0){
-            return n;
-        }
-        bool allzero=all_of(nums.begin(),nums.end(),[](int i){
-            return i==0;});
-        if(allzero) return 0;
 
-        return n-1;
+        bool allxor=true;
+        int ansXor=0;
+
+        for(int it:nums){
+            ansXor^=it;
+
+            if(it!=0){
+                allxor=false;
+
+            }
+        }
+        if(allxor){
+            return 0;
+        }
+      return ansXor==0?n-1:n;  
     }
 };
