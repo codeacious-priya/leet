@@ -28,7 +28,7 @@ public:
                             if(solve(board)){
                                 return true;
                             }
-                           
+                            else
                              board[i][j]='.';
                         }
                        
