@@ -1,20 +1,21 @@
 class Solution {
 public:
     vector<int> resultArray(vector<int>& nums) {
-        vector<int> nums1, nums2;
-
-        nums1.push_back(nums[0]);
-        nums2.push_back(nums[1]);
-
-        for (int i = 2; i < nums.size(); i++) {
-            if (nums1.back() > nums2.back()) {
-                nums1.push_back(nums[i]);
-            } else {
-                nums2.push_back(nums[i]);
+        int n=nums.size();
+        vector<int>arr(n);
+        arr[0]=nums[0];
+        arr[n-1]=nums[1];
+        int i=0;
+        int j=n-1;
+        for(int k=2;k<n;k++){
+            if(arr[i]>arr[j]){
+                arr[++i]=nums[k];
+            }
+            else{
+                arr[--j]=nums[k];
             }
         }
-
-        nums1.insert(nums1.end(), nums2.begin(), nums2.end());
-        return nums1;
+        reverse(arr.begin()+j,arr.end());
+        return arr;
     }
 };
