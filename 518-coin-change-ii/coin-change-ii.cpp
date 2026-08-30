@@ -18,8 +18,26 @@ public:
     }
     int change(int amount, vector<int>& coins) {
         int n=coins.size();
-        vector<vector<int>>dp(n,vector<int>(amount+1,-1));
-        return solve(n-1,amount,coins,dp);
-        
+        vector<vector<unsigned long long>>dp(n,vector<unsigned long long>(amount+1,0));
+
+        for(int t=0;t<=amount;t++){
+            if(t%coins[0]==0)
+            dp[0][t]=1;
+            
+                
+            
+        }
+
+        for(int i=1;i<n;i++){
+            for(int t=0;t<=amount;t++){
+            unsigned   long long not_pick=dp[i-1][t];
+              unsigned  long long pick=0;
+                if(coins[i]<=t){
+                    pick=dp[i][t-coins[i]];
+                }
+                dp[i][t]=pick+not_pick;
+            }
+        }
+        return (int)dp[n-1][amount];
     }
 };
