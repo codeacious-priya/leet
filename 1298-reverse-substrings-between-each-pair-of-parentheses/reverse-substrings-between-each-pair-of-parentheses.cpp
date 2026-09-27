@@ -2,29 +2,31 @@ class Solution {
 public:
     string reverseParentheses(string s) {
         int n = s.size();
-        stack<int>st;
-        for(int i=0;i<n;i++){
-            if(s[i] == ')'){
-                string temp = "";
-                while(st.top()!='('){
-                    temp += st.top();
-                    st.pop();
+        for(int j=0;j<n;j++){
+            if(s[j]==')'){
+                int i=j-1;
+                while(s[i]!='('){
+                    i--;
                 }
-                st.pop();
-                for(auto it: temp){
-                    st.push(it);
-                }
-            }
-            else{
-                st.push(s[i]);
+                s[i]='#';
+                s[j]='#';
+                reverse(s.begin()+i+1,s.begin()+j);
             }
         }
-        string ans="";
-        while(!st.empty()){
-            ans += st.top();
-            st.pop();
+        string ans = "";
+        for(auto it: s){
+            if(it!='#')ans+=it;
         }
-        reverse(ans.begin(), ans.end());
         return ans;
+        
+        //debug karo na ji kaha galat ho rha
+        // aise nhi hog
+        //ok
+       // jo mai soch rahi thi vo nhi ho sakkta 
+       // wrong ans ayega
+       //ha sahi baat hai 
+       //two pointer se ho skta hai karo 
+       // kar rahi ?????
+       // inner bracket ko reverse karenge fir outer bracket ko toh sahi hoga
     }
 };
