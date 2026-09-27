@@ -5,7 +5,7 @@ public:
 
         int n=nums.size();
         auto first=lower_bound(nums.begin(),nums.end(),target);
-        auto second=upper_bound(nums.begin(),nums.end(),target);
+        auto second=lower_bound(nums.begin(),nums.end(),target+1);
         if(first==second){
             return ans;
         }
