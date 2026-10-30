@@ -1,62 +1,55 @@
 class Solution {
 public:
-    bool issafe(int col,int row,int n,vector<vector<string>>&ans,vector<string>&res){
-        int i=row;
-        int j=col;
-
+    bool isSafe(int row ,int col,vector<string>&board,int n){
+        int duprow=row;
+        int dupcol=col;
+     //up left
+        while(row>=0 && col>=0){
+            if(board[row][col]=='Q') return false;
+            row--;
+            col--;
+        }
+        col=dupcol;
+        row=duprow;
+//straigt left
         while(col>=0){
-           if(res[row][col]=='Q'){
-            return false;
-           }
-           col--;
-
+            if(board[row][col]=='Q') return false;
+            col--;
         }
-        row=i;
-        col=j;
-
-         while(row>=0 && col>=0){
-           if(res[row][col]=='Q'){
-            return false;
-           }
-           row--;
-           col--;
-
-        }
-        row=i;
-        col=j;
-        while(row<n&&col>=0){
-            if(res[row][col]=='Q'){
-                return false;
-            }
+        col=dupcol;
+        row=duprow;
+        //down left
+        while(row<n && col>=0){
+            if(board[row][col]=='Q') return false;
             row++;
             col--;
         }
-        return true;
+    return true;
     }
-    void solve(int col,int n,vector<vector<string>>&ans,vector<string>&res){
-        // base case
+    void solve(int col,vector<string>&board,vector<vector<string>>&ans,int n){
+        //bc
         if(col==n){
-            ans.push_back(res);
+            ans.push_back(board);
             return;
-
         }
-       
-        for(int row=0;row<n;row++){
-            if(issafe(col,row,n,ans,res)){
-                res[row][col]='Q';
-                solve(col+1,n,ans,res);
-                res[row][col]='.';
 
+        for(int row =0;row<n;row++){
+            if(isSafe(row,col,board,n)){
+                board[row][col]='Q'; // do
+                solve(col+1,board,ans,n);
+                board[row][col]='.'; // undo
             }
-            
-
         }
     }
     vector<vector<string>> solveNQueens(int n) {
+        ///for loop ->jisse 1 col k haar row me Q put karke ,check karenge recursion se ki sari queen rakh sakte h recurssion se .if so usse vector me push ,else see new approach 
+
         vector<vector<string>>ans;
-        vector<string>res(n,string (n,'.'));
-        solve(0,n,ans,res);
+        vector<string>board(n,string(n,'.'));
+
+        solve(0,board,ans,n);
         return ans;
+
         
     }
 };
