@@ -1,37 +1,29 @@
 class Solution {
 public:
-    
-    
-    int minDistance(string word1, string word2) {
-        int n=word1.size();
-        int m=word2.size();
-    
-     vector<long long>prev(m+1,0),curr(m+1,0);
-       // delete
-       for(int i=0;i<=n;i++){
-        prev[0]=i;
-       }
-       //insert
-       for(int j=0;j<=m;j++){
-       prev[j]=j;
-       }
-       
-       for(int i=1;i<=n;i++){
-         curr[0]=i;
-        for(int j=1;j<=m;j++){
-            if(word1[i-1]==word2[j-1]){
-                curr[j]=prev[j-1];
-            }
-            else{
-                int del=1+prev[j];
-                int insert=1+curr[j-1];
-                int replace=1+prev[j-1];
-
-               curr[j]=min({del,insert,replace});
-            }
+    int solve(int i,int j,string s,string w,vector<vector<int>>&dp){
+        // base case
+        if(i<0) return j+1;
+        if(j<0) return i+1;
+        int ans=1e7;
+        if(dp[i][j]!=-1){
+            return dp[i][j];
         }
-        prev=curr;
-       }
-        return prev[m];
+        if(s[i]==w[j]){
+            ans=solve(i-1,j-1,s,w,dp);
+        }
+
+        int insert=1+solve(i-1,j,s,w,dp);
+        int del=1+solve(i,j-1,s,w,dp);
+        int replace=1+solve(i-1,j-1,s,w,dp);
+
+        return dp[i][j]=min({insert,del,replace,ans});
+    }
+    int minDistance(string word1, string word2) {
+        int m=word1.size();
+        int n=word2.size();
+        vector<vector<int>>dp(m+1,vector<int>(n+1,-1));
+
+        return solve(m-1,n-1,word1,word2,dp);
+        
     }
 };
